@@ -2,13 +2,8 @@ package metamask
 
 import (
 	web3login "github.com/CypherBabel/web3-login"
-	"github.com/CypherBabel/web3-login/util/strutil"
 	ethcommon "github.com/ethereum/go-ethereum/common"
 	"github.com/storyicon/sigverify"
-)
-
-const (
-	challengeStringLengthPersonal = 32
 )
 
 type ServicePersonal struct {
@@ -27,9 +22,8 @@ func (s *ServicePersonal) GetInviterId() int64 {
 	return s.InviterId
 }
 
-func (s *ServicePersonal) Challenge() string {
-	s.ChallengeStr = strutil.Rand(challengeStringLengthPersonal)
-	return s.ChallengeStr
+func (s *ServicePersonal) Challenge(str string) {
+	s.ChallengeStr = str
 }
 
 func (s *ServicePersonal) Verify(verifyStr string) (bool, error) {

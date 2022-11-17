@@ -4,14 +4,9 @@ import (
 	"encoding/json"
 
 	web3login "github.com/CypherBabel/web3-login"
-	"github.com/CypherBabel/web3-login/util/strutil"
 	ethcommon "github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
 	"github.com/storyicon/sigverify"
-)
-
-const (
-	challengeStringLength = 32
 )
 
 type ServiceEip712 struct {
@@ -30,9 +25,8 @@ func (s *ServiceEip712) GetInviterId() int64 {
 	return s.InviterId
 }
 
-func (s *ServiceEip712) Challenge() string {
-	s.ChallengeStr = strutil.Rand(challengeStringLength)
-	return s.ChallengeStr
+func (s *ServiceEip712) Challenge(str string) {
+	s.ChallengeStr = str
 }
 
 func (s *ServiceEip712) Verify(verifyStr string) (bool, error) {
