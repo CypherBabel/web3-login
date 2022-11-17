@@ -14,28 +14,28 @@ const (
 	challengeStringLength = 32
 )
 
-type Service struct {
+type ServiceEip712 struct {
 	Address      string // 钱包地址
 	InviterId    int64  // 邀请人id
 	ChallengeStr string
 }
 
-func NewService(address string, inviterId int64) web3login.Web3login {
-	return &Service{
+func NewServiceEip712(address string, inviterId int64) web3login.Web3login {
+	return &ServiceEip712{
 		Address:   address,
 		InviterId: inviterId,
 	}
 }
-func (s *Service) GetInviterId() int64 {
+func (s *ServiceEip712) GetInviterId() int64 {
 	return s.InviterId
 }
 
-func (s *Service) Challenge() string {
+func (s *ServiceEip712) Challenge() string {
 	s.ChallengeStr = strutil.Rand(challengeStringLength)
 	return s.ChallengeStr
 }
 
-func (s *Service) Verify(verifyStr string) (bool, error) {
+func (s *ServiceEip712) Verify(verifyStr string) (bool, error) {
 	var typedData apitypes.TypedData
 	if err := json.Unmarshal([]byte(s.ChallengeStr), &typedData); err != nil {
 		return false, err

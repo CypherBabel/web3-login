@@ -3,7 +3,7 @@ package metamask
 import "testing"
 
 func TestSignEip712(t *testing.T) {
-	client := &Service{
+	client := &ServiceEip712{
 		Address: "0xaC39b311DCEb2A4b2f5d8461c1cdaF756F4F7Ae9",
 		ChallengeStr: `{
 			"types": {
